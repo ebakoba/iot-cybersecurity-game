@@ -28,6 +28,7 @@
     "koa-websocket": "^5.0.1",
     "node-forge": "^0.7.6",
     "rpio": "^0.9.23",
-    "sqlite3": "^4.0.4"
+    "sqlite3": "^4.0.4",
+    "websocket": "^1.0.28"
   }
 }

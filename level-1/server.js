@@ -4,7 +4,8 @@ const path = require('path')
 const Router = require('koa-router')
 const { prepareDatabase } = require('../database')
 const { requireAuthentication, loginPost } = require('../authentication')
-const app = require('../websocketServer')
+const { createServer } = require('../websocketServer')
+const app = createServer(true)
 
 prepareDatabase('$2b$10$8jyIo5qqXYKWEOjUc6SX3OFQ2BFpre9UyDuAjNfjqGybUAeP1kAJK').then((database) => {
   const router = new Router()

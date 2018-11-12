@@ -1,9 +1,6 @@
 
 const path = require('path')
 const cli = require('cli')
-const gpio = require('./gpio')
-
-gpio.initialize()
 
 const { level } = cli.parse({
   level: ['l', 'A game vulnerability level', 'number', 1]
