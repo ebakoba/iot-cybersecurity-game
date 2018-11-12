@@ -15,7 +15,8 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0"
+    "eslint-plugin-standard": "^4.0.0",
+    "sqlite3": "^4.0.4"
   },
   "dependencies": {
     "bcrypt": "^3.0.2",
@@ -28,7 +29,6 @@
     "koa-websocket": "^5.0.1",
     "node-forge": "^0.7.6",
     "rpio": "^0.9.23",
-    "sqlite3": "^4.0.4",
     "websocket": "^1.0.28"
   }
 }
