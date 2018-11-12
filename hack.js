@@ -15,7 +15,8 @@ client.on('connect', (connection) => {
       }))
     }
   }
-  toggleRelay()
+
+  setInterval(toggleRelay, 200)
 })
 
 client.connect('ws://localhost:3000/websocket', 'echo-protocol')
