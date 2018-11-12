@@ -2,7 +2,7 @@ const rpio = require('rpio')
 
 const initialize = () => {
   rpio.open(11, rpio.OUTPUT, rpio.LOW)
-  rpio.open(11, rpio.OUTPUT, rpio.HIGH)
+  rpio.open(12, rpio.OUTPUT, rpio.HIGH)
 }
 
 const getValues = () => {
