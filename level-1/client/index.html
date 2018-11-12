@@ -32,4 +32,17 @@
           </div>
       </div>
   </body>
+  <script>
+    const websocket = new WebSocket('ws://' + location.host + '/websocket');
+
+    websocket.onopen = function(event) {
+      console.log(event);
+      websocket.send('my message')
+    }
+    
+    websocket.onmessage = function(event) {
+      console.log('message');
+      console.log(event);
+    }
+  </script>
 </html>

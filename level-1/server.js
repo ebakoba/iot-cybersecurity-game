@@ -2,24 +2,17 @@ console.log('hello from server 1')
 const bcrypt = require('bcrypt')
 const fs = require('fs')
 const path = require('path')
-const Koa = require('koa')
 const session = require('koa-session')
 const bodyParser = require('koa-bodyparser')
 const Router = require('koa-router')
-const prepareDatabase = require('../database').prepareDatabase
+const { prepareDatabase } = require('../database')
+const { requireAuthentication } = require('../authentication')
+const app = require('../websocketServer')
 
 prepareDatabase('$2b$10$8jyIo5qqXYKWEOjUc6SX3OFQ2BFpre9UyDuAjNfjqGybUAeP1kAJK').then((database) => {
   console.log('database', database)
-  const app = new Koa()
   const router = new Router()
 
-  const requireAuthentication = (ctx, next) => {
-    if (ctx.session.authenticated) {
-      next()
-    } else {
-      ctx.redirect('/login')
-    }
-  }
   router.get('/', requireAuthentication, (ctx) => {
     ctx.type = 'html'
     ctx.body = fs.createReadStream(path.join('level-1', 'client', 'index.html'))
@@ -45,7 +38,7 @@ prepareDatabase('$2b$10$8jyIo5qqXYKWEOjUc6SX3OFQ2BFpre9UyDuAjNfjqGybUAeP1kAJK').
             resolve()
           })
         } else {
-          bcrypt.compare('jambolaia', '$2b$10$8jyIo5qqXYKWEOjUc6SX3OFQ2BFpre9UyDuAjNfjqGybUAeP1kAJK', () => {
+          bcrypt.compare('jambolaia', '$2b$10$8jyIo6ssXYKWEOjUc6SX3OFQ2BFpre9UyDuAjNfjqGybUAeP1kAJK', () => {
             resolve()
           })
         }
