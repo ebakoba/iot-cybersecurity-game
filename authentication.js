@@ -1,6 +1,5 @@
 
 const requireAuthentication = (ctx, next) => {
-  console.log('session', ctx.session)
   if (ctx.session.authenticated) {
     next()
   } else {
@@ -8,6 +7,16 @@ const requireAuthentication = (ctx, next) => {
   }
 }
 
+const loginPost = async (ctx, next, authenticate) => {
+  const user = ctx.request.body
+  if (user.username !== undefined && user.password !== undefined) {
+    await authenticate(ctx, user)
+  }
+
+  ctx.redirect('/')
+}
+
 module.exports = {
-  requireAuthentication
+  requireAuthentication,
+  loginPost
 }

@@ -1,4 +1,3 @@
-console.log('hello from server 1')
 const bcrypt = require('bcrypt')
 const fs = require('fs')
 const path = require('path')
@@ -6,11 +5,10 @@ const session = require('koa-session')
 const bodyParser = require('koa-bodyparser')
 const Router = require('koa-router')
 const { prepareDatabase } = require('../database')
-const { requireAuthentication } = require('../authentication')
+const { requireAuthentication, loginPost } = require('../authentication')
 const app = require('../websocketServer')
 
 prepareDatabase('$2b$10$8jyIo5qqXYKWEOjUc6SX3OFQ2BFpre9UyDuAjNfjqGybUAeP1kAJK').then((database) => {
-  console.log('database', database)
   const router = new Router()
 
   router.get('/', requireAuthentication, (ctx) => {
@@ -29,11 +27,9 @@ prepareDatabase('$2b$10$8jyIo5qqXYKWEOjUc6SX3OFQ2BFpre9UyDuAjNfjqGybUAeP1kAJK').
       statement.run(user.username).all((err, rows) => {
         if (err) throw err
 
-        console.log('rows', rows)
         if (rows.length === 1) {
           bcrypt.compare(user.password, rows[0].hash, (err, isSame) => {
             if (err) throw err
-            console.log(isSame)
             if (isSame) ctx.session.authenticated = true
             resolve()
           })
@@ -46,14 +42,7 @@ prepareDatabase('$2b$10$8jyIo5qqXYKWEOjUc6SX3OFQ2BFpre9UyDuAjNfjqGybUAeP1kAJK').
     })
   }
 
-  router.post('/login', async (ctx) => {
-    const user = ctx.request.body
-    if (user.username !== undefined && user.password !== undefined) {
-      await authenticate(ctx, user)
-    }
-
-    ctx.redirect('/')
-  })
+  router.post('/login', async (ctx, next) => loginPost(ctx, next, authenticate))
 
   app.keys = [Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 64)]
   app.use(session(app))

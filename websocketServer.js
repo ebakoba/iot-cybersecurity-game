@@ -12,7 +12,6 @@ const websocketRouter = new Router()
 const activeClients = []
 
 const broadcastMessage = (message) => {
-  console.log(activeClients.length)
   activeClients.forEach((client) => {
     client.send(message)
   })

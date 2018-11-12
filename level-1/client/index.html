@@ -34,7 +34,6 @@
   </body>
   <script>
     function applyRelayValues(values) {
-      console.log('values to apply: ', values)
       Object.entries(values).forEach(([key, value]) => {
         const relay = document.getElementById(`relay-${key}`);
         relay.classList.remove('button-danger');
@@ -58,7 +57,6 @@
     const websocket = new WebSocket('ws://' + location.host + '/websocket');
 
     websocket.onmessage = function(event) {
-      console.log('event', event)
       handleMessage(JSON.parse(event.data))
     }
 

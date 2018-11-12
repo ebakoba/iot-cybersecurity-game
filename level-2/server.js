@@ -1,4 +1,3 @@
-console.log('hello from server 1')
 const forge = require('node-forge')
 const prepareDatabase = require('../database').prepareDatabase
 

@@ -10,7 +10,7 @@ const getValues = () => {
     11: rpio.read(11) === 0,
     12: rpio.read(12) === 0
   }
-  console.log(values)
+
   return values
 }
 
