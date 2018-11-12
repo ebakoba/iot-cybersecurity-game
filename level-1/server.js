@@ -14,6 +14,11 @@ prepareDatabase('$2b$10$8jyIo5qqXYKWEOjUc6SX3OFQ2BFpre9UyDuAjNfjqGybUAeP1kAJK').
     ctx.body = fs.createReadStream(path.join('level-1', 'client', 'index.html'))
   })
 
+  router.get('/manual', (ctx) => {
+    ctx.type = 'html'
+    ctx.body = fs.createReadStream(path.join('level-1', 'client', 'manual.html'))
+  })
+
   router.get('/login', (ctx) => {
     ctx.type = 'html'
     ctx.body = fs.createReadStream(path.join('level-1', 'client', 'login.html'))
