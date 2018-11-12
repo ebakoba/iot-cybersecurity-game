@@ -1,8 +1,6 @@
 const bcrypt = require('bcrypt')
 const fs = require('fs')
 const path = require('path')
-const session = require('koa-session')
-const bodyParser = require('koa-bodyparser')
 const Router = require('koa-router')
 const { prepareDatabase } = require('../database')
 const { requireAuthentication, loginPost } = require('../authentication')
@@ -25,11 +23,11 @@ prepareDatabase('$2b$10$8jyIo5qqXYKWEOjUc6SX3OFQ2BFpre9UyDuAjNfjqGybUAeP1kAJK').
     return new Promise((resolve, reject) => {
       const statement = database.prepare('SELECT * FROM users WHERE username=?')
       statement.run(user.username).all((err, rows) => {
-        if (err) throw err
+        if (err) reject(err)
 
         if (rows.length === 1) {
           bcrypt.compare(user.password, rows[0].hash, (err, isSame) => {
-            if (err) throw err
+            if (err) reject(err)
             if (isSame) ctx.session.authenticated = true
             resolve()
           })
@@ -44,11 +42,7 @@ prepareDatabase('$2b$10$8jyIo5qqXYKWEOjUc6SX3OFQ2BFpre9UyDuAjNfjqGybUAeP1kAJK').
 
   router.post('/login', async (ctx, next) => loginPost(ctx, next, authenticate))
 
-  app.keys = [Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 64)]
-  app.use(session(app))
-
   app
-    .use(bodyParser())
     .use(router.routes())
     .use(router.allowedMethods())
 

@@ -1,6 +1,8 @@
 const Koa = require('koa')
 const Router = require('koa-router')
 const websockify = require('koa-websocket')
+const session = require('koa-session')
+const bodyParser = require('koa-bodyparser')
 const { requireAuthentication } = require('./authentication')
 const gpio = require('./gpio')
 
@@ -8,6 +10,10 @@ gpio.initialize() // TODO remove
 
 const app = websockify(new Koa())
 const websocketRouter = new Router()
+
+app.keys = [Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 64)]
+app.use(session(app))
+  .use(bodyParser())
 
 const activeClients = []
 
