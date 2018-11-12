@@ -5,10 +5,14 @@ const initialize = () => {
   rpio.open(11, rpio.OUTPUT, rpio.HIGH)
 }
 
-const getValues = () => ({
-  11: rpio.read(11) === 0,
-  12: rpio.read(12) === 0
-})
+const getValues = () => {
+  const values = {
+    11: rpio.read(11) === 0,
+    12: rpio.read(12) === 0
+  }
+  console.log(values)
+  return values
+}
 
 const toggle = (pin) => {
   rpio.write(pin, rpio.read(pin) === 0 ? 1 : 0)

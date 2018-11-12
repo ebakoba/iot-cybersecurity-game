@@ -22,27 +22,53 @@
             <div class="row">
               <div class="col col-xs-6">
                 <h3>Bedroom</h3>
-                <button type="button" class="button-primary button-large">On</button>
+                <button onclick="toggleRelay(11)" id="relay-11" type="button" class="button-primary button-large">On</button>
               </div>
               <div class="col col-xs-6">
                 <h3>Dining room</h3>
-                <button type="button" class="button-danger button-large">Off</button>
+                <button onclick="toggleRelay(12)" id="relay-12" type="button" class="button-danger button-large">Off</button>
               </div>
             </div>
           </div>
       </div>
   </body>
   <script>
+    function applyRelayValues(values) {
+      console.log('values to apply: ', values)
+      Object.entries(values).forEach(([key, value]) => {
+        const relay = document.getElementById(`relay-${key}`);
+        relay.classList.remove('button-danger');
+        relay.classList.remove('button-primary');
+        relay.classList.add( value ? 'button-primary' : 'button-danger');
+        relay.innerText = value ? 'ON' : 'OFF';
+      });
+    }
+
+    function handleMessage(message) {
+      switch (message.type) {
+        case 'allRelays':
+          applyRelayValues(JSON.parse(message.data));
+          break;
+        default:
+          throw new Error('Unknown message type');
+          break;
+      }
+    }
+
     const websocket = new WebSocket('ws://' + location.host + '/websocket');
 
-    websocket.onopen = function(event) {
-      console.log(event);
-      websocket.send('my message')
-    }
-    
     websocket.onmessage = function(event) {
-      console.log('message');
-      console.log(event);
+      console.log('event', event)
+      handleMessage(JSON.parse(event.data))
+    }
+
+    function toggleRelay(pin) {
+      websocket.send(JSON.stringify({
+        type: 'toggleRelay',
+        data: JSON.stringify({
+          pin
+        })
+      }))
     }
   </script>
 </html>
