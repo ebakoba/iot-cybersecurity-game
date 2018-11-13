@@ -13,10 +13,16 @@ client.on('connect', (connection) => {
           pin: 12
         })
       }))
+      connection.send(JSON.stringify({
+        type: 'toggleRelay',
+        data: JSON.stringify({
+          pin: 11
+        })
+      }))
     }
   }
 
-  setInterval(toggleRelay, 200)
+  setInterval(toggleRelay, 100)
 })
 
-client.connect('ws://localhost:3000/websocket', 'echo-protocol')
+client.connect('ws://192.168.1.1/websocket')
