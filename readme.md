@@ -2,7 +2,7 @@
 
 ## Description
 
-IoT cybersecuirty awareness games created to illustrate most typical cybersecurity lapses in IoT systems. The game design expects some technical capablities, which range from reading manuals to acutally writing code. Game has to levels, which are ordered by difficulty.
+IoT cybersecuirty awareness games created to illustrate most typical cybersecurity lapses in IoT systems. The game design expects some technical capablities, which range from reading manuals to acutally writing code. Game has three levels, which are ordered by difficulty.
 
 ### Level 1
 
