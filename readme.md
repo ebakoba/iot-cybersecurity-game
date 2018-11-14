@@ -87,7 +87,7 @@ Can produce a result like this:
 
 ### Software
 
-* Raspbian
+* Raspbian OS
 
 ## Setup
 
@@ -97,7 +97,7 @@ Connect the Raspberry Pi and the relay module as shown below:
 
 ![hardware-schema](./images/hardware-schema.png)
 
-So by using physical [pin numbering](https://pinout.xyz/pinout/pin1_3v3_power), which starts at the upper left, connection should be mapped like this:
+So by using physical [pin numbering schema](https://pinout.xyz/pinout/pin1_3v3_power), connection should be mapped like this:
 
 1. Raspberry pin 6 -> Relay module GND
 2. Raspberry pin 4 -> Relay module VCC
