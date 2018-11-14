@@ -91,6 +91,21 @@ Can produce a result like this:
 
 ## Setup
 
+### Hardware
+
+Connect the Raspberry Pi and the relay module as shown below:
+
+![hardware-schema](./images/hardware-schema.png)
+
+So by using physical [pin numbering](https://pinout.xyz/pinout/pin1_3v3_power), which starts at the upper left, connection should be mapped like this:
+
+1. Raspberry pin 6 -> Relay module GND
+2. Raspberry pin 4 -> Relay module VCC
+3. Raspberry pin 11 -> Relay module IN1
+4. Raspberry pin 12 -> Relay module IN2
+
+### Software
+
 * ```sudo apt-get install git```
 * ```curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh```
 * Optionally follow [instructions](https://medium.freecodecamp.org/the-easy-way-to-set-up-docker-on-a-raspberry-pi-7d24ced073ef) to avoid ```sudo ``` commands with docker
