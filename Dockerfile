@@ -1,4 +1,4 @@
-FROM hypriot/rpi-node
+FROM arm32v7/node:16
 ENV LEVEL=1
 
 # Set the working directory to /app
