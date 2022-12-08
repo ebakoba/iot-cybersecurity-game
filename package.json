@@ -19,7 +19,7 @@
     "sqlite3": "^4.0.4"
   },
   "dependencies": {
-    "bcrypt": "^3.0.2",
+    "bcrypt": "^5",
     "cli": "^1.0.1",
     "koa": "^2.6.2",
     "koa-bodyparser": "^4.2.1",
@@ -28,7 +28,7 @@
     "koa-session": "^5.10.0",
     "koa-websocket": "^5.0.1",
     "node-forge": "^0.7.6",
-    "rpio": "^0.9.23",
+    "rpio": "^2",
     "websocket": "^1.0.28"
   }
 }
